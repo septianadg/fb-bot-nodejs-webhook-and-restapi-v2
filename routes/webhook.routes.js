@@ -47,31 +47,7 @@ router.post('/', function (req, res) {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
 
-
-            const posts = [
-                {
-                   sender_id: 'Headline 3',
-                   messages: "voluptate et itaque vero tempora molestiae"
-                }
-             ]
-
-             // Loop over the posts
-            posts.forEach(post => {
-            
-                // Post data to API endpoint
-                axios.post(URL_SERVICE_API+'/api/v1/messages', {
-                body: post,
-                })
-            
-                // Print response
-                .then(response => {
-                    const { sender_id, messages } = response.data.body
-                    console.log(`Post ${sender_id}: ${messages}`)
-                })
-            
-                // Print error message if occur
-                .catch(error => console.log(error))
-            })
+             
             
         } 
     }
