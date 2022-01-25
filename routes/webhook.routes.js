@@ -50,8 +50,8 @@ router.post('/', function (req, res) {
 
             const posts = [
                 {
-                   sender_id: event.sender.id,
-                   messages: event.message.text
+                   sender_id: `${event.sender.id}`,
+                   messages: `${event.message.text}`
                 }
              ]
 
