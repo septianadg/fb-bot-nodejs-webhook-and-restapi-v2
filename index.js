@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var nextbirthday;
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -39,13 +40,13 @@ app.post('/webhook', function (req, res) {
                 {
                     if(isValidDate(event.message.text.toLowerCase())) 
                     {
+                        nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
                         sendMessage(event.sender.id, {text: "Do you want to know how many days till your next birthday?"});
                     } else {
                         sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
                     }
             } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup')
             {
-                var nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
                 sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
             } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
             {
