@@ -5,7 +5,7 @@ var app = express();
 
 var nextbirthday;
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
