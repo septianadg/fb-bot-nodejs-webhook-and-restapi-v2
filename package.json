@@ -1,0 +1,17 @@
+{
+  "name": "testbotfbmessengeradakerja",
+  "version": "1.0.0",
+  "description": "TestBot Fb Messenger Adakerja App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Septiyan Adi Guna",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "request": "^2.88.2"
+  }
+}
