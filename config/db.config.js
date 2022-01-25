@@ -23,7 +23,7 @@ var db_config = {
 var dbConn;
 
 function handleDisconnect() {
-  dbConn = mysql.createConnection(db_config); // Recreate the connection, since
+  dbConn = mysql.createPool(db_config); // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   dbConn.connect(function(err) {              // The server is either down
