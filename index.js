@@ -35,7 +35,11 @@ app.post('/webhook', function (req, res) {
 
             if(event.message.text.toLowerCase()=== 'hi')
             {
-                sendMessage(event.sender.id, {text: "Hi, what is your first name? "+event.sender.id+" "+event.sender.name+" "+event.sender.first_name+" "});
+                r = requests.get('https://graph.facebook.com/{}?fields=first_name,last_name,profile_pic&access_token={}'.format(event.sender.id, process.env.PAGE_ACCESS_TOKEN)).json()
+                first_name = r['first_name']
+                last_name = r['last_name']
+
+                sendMessage(event.sender.id, {text: "Hi, what is your first name? "+event.sender.id+" "+first_name+" "+last_name+" "});
             } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
                 {
                     if(isValidDate(event.message.text.toLowerCase())) 
