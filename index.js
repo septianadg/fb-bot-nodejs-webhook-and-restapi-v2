@@ -43,11 +43,14 @@ app.post('/webhook', function (req, res) {
                     } else {
                         sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
                     }
-            } else if (event.message.text.toLowerCase()!== 'hi')
+            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup')
             {
-                sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
+                sendMessage(event.sender.id, {text: "There are <N> days left until your next birthday"});
+            } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
+            {
+                sendMessage(event.sender.id, {text: "Goodbye"});
             } else {
-                sendMessage(event.sender.id, {text: "Lets start conversation with say 'Hi'"});
+                sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
             
         } 
