@@ -4,6 +4,13 @@ var request = require('request');
 
 var nextbirthday;
 
+const apiAdapter = require('./apiAdapter');
+const {
+  URL_SERVICE_API
+} = process.env;
+
+const api = apiAdapter(URL_SERVICE_API);
+
 // Facebook Webhook
 router.get('/', function (req, res) {
     if (req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
@@ -41,6 +48,28 @@ router.post('/', function (req, res) {
             } else {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
+
+            module.exports = async (req, res) => {
+                try {
+                  const senderId = event.sender.id;
+                  //const firstName = req.body.course_id;
+                  const messages = event.message.text;
+              
+                  const dtMessages = await api.post('/api/v1/messages', {
+                    sender_id: senderId,
+                    messages: messages
+                  });
+                  return res.json(dtMessages.data);
+                } catch (error) {
+              
+                  if (error.code === 'ECONNREFUSED') {
+                    return res.status(500).json({ status: 'error', message: 'service unavailable' });
+                  }
+              
+                  const { status, data } = error.response;
+                  return res.status(status).json(data);
+                }
+              }
             
         } 
     }
