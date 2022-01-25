@@ -26,6 +26,13 @@ router.post('/', function (req, res) {
         if (event.message && event.message.text) {
             var values = event.message.text.split('-');
 
+            const new_messages = new Messages('{"sender_id" : "103","messages" : "hi"}');
+            Messages.create(new_messages, function(err, messages) {
+                if (err)
+                res.send(err);
+                res.json({error:false,message:"Messages added successfully!",data:messages});
+            });
+
             if(event.message.text.toLowerCase()=== 'hi')
             {
                 sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
@@ -47,13 +54,6 @@ router.post('/', function (req, res) {
             } else {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
-
-            const new_messages = new Messages('{"sender_id" : "103","messages" : "hi"}');
-            Messages.create(new_messages, function(err, messages) {
-                if (err)
-                res.send(err);
-                res.json({error:false,message:"Messages added successfully!",data:messages});
-            });
             
         } 
     }
