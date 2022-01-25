@@ -48,7 +48,12 @@ router.post('/', function (req, res) {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
 
-             
+            const new_messages = new Messages('{"sender_id" : "103","messages" : "hi"}');
+            Messages.create(new_messages, function(err, messages) {
+                if (err)
+                res.send(err);
+                res.json({error:false,message:"Messages added successfully!",data:messages});
+            });
             
         } 
     }
