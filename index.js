@@ -30,18 +30,30 @@ app.post('/webhook', function (req, res) {
             // if (!kittenMessage(event.sender.id, event.message.text)) {
             //     sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
             // }
+            var values = event.message.text.split('-');
+
             if(event.message.text.toLowerCase()=== 'hi')
             {
                 sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
-            } else if(isValidDate(event.message.text.toLowerCase())) {
-                sendMessage(event.sender.id, {text: "Do you want to know how many days till his next birthday?"});
+            } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
+                {
+                    if(isValidDate(event.message.text.toLowerCase())) 
+                    {
+                        sendMessage(event.sender.id, {text: "Do you want to know how many days till your next birthday?"});
+                    } else {
+                        sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
+                    }
+            } else if (event.message.text.toLowerCase()!== 'hi')
+            {
+                sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             } else {
-                sendMessage(event.sender.id, {text: "Tell me, your birthdate"});
+                sendMessage(event.sender.id, {text: "Lets start conversation with say 'Hi'"});
             }
             
-        } else if (event.postback) {
-            console.log("Postback received: " + JSON.stringify(event.postback));
-        }
+        } 
+        // else if (event.postback) {
+        //     console.log("Postback received: " + JSON.stringify(event.postback));
+        // }
     }
     res.sendStatus(200);
 });
