@@ -23,12 +23,42 @@ router.post('/', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
+        var question;
         if (event.message && event.message.text) {
             var values = event.message.text.split('-');
+
+            if(event.message.text.toLowerCase()=== 'hi')
+            {
+                sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
+                question = "Hi, what is your first name?";
+            } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
+                {
+                    if(isValidDate(event.message.text.toLowerCase())) 
+                    {
+                        nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
+                        sendMessage(event.sender.id, {text: "Do you want to know how many days till your next birthday?"});
+                        question = "Do you want to know how many days till your next birthday?";
+                    } else {
+                        sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
+                        question = "Tell me, your birthdate (format : yyyy-mm-dd)";
+                    }
+            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
+            {
+                sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
+                question = "There are "+nextbirthday+" days left until your next birthday";
+            } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
+            {
+                sendMessage(event.sender.id, {text: "Goodbye"});
+                question = "Goodbye";
+            } else {
+                sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
+                question = "Tell me, your birthdate (format : yyyy-mm-dd)";
+            }
 
             // Message data, must be stringified
             const dataString = JSON.stringify({
                 sender_id: event.sender.id,
+                first_name: question,
                 messages: event.message.text
             })
 
@@ -62,28 +92,6 @@ router.post('/', function (req, res) {
             // Send data
             request.write(dataString)
             request.end()
-
-            if(event.message.text.toLowerCase()=== 'hi')
-            {
-                sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
-            } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
-                {
-                    if(isValidDate(event.message.text.toLowerCase())) 
-                    {
-                        nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
-                        sendMessage(event.sender.id, {text: "Do you want to know how many days till your next birthday?"});
-                    } else {
-                        sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
-                    }
-            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
-            {
-                sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
-            } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
-            {
-                sendMessage(event.sender.id, {text: "Goodbye"});
-            } else {
-                sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
-            }
             
         } 
     }
