@@ -1,4 +1,3 @@
-const Messages = require('../models/messages.model');   
 var express = require('express');
 const router = express.Router()
 var request = require('request');
@@ -26,12 +25,42 @@ router.post('/', function (req, res) {
         if (event.message && event.message.text) {
             var values = event.message.text.split('-');
 
-            const new_messages = new Messages('{"sender_id" : "103","messages" : "hi"}');
-            Messages.create(new_messages, function(err, messages) {
-                if (err)
-                res.send(err);
-                res.json({error:false,message:"Messages added successfully!",data:messages});
-            });
+            // Message data, must be stringified
+            const dataString = JSON.stringify({
+                sender_id: event.sender.id,
+                messages: event.message.text
+            })
+
+            // Request header
+            const headers = {
+                "Content-Type": "application/json"
+            }
+        
+            // Options to pass into the request
+            const webhookOptions = {
+                "hostname": "https://fb-bot-nodejs-webhook-and-rest.herokuapp.com",
+                "path": "/api/v1/messages",
+                "method": "POST",
+                "headers": headers,
+                "body": dataString
+            }
+
+            // Define request
+            const request = https.request(webhookOptions, (res) => {
+                res.on("data", (d) => {
+                process.stdout.write(d)
+                })
+            })
+            
+        
+            // Handle error
+            request.on("error", (err) => {
+                console.error(err)
+            })
+
+            // Send data
+            request.write(dataString)
+            request.end()
 
             if(event.message.text.toLowerCase()=== 'hi')
             {
