@@ -7,7 +7,7 @@ var nextbirthday;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.listen((process.env.PORT || 3000));
+app.listen((process.env.PORT || 5005));
 
 // Server frontpage
 app.get('/', function (req, res) {
@@ -108,11 +108,6 @@ function getNextBirthday(date,month){
     return days;
     //alert(days+" days until Niet's birthday!");
 }
-
-// Require message routes
-const messagesRoutes = require('./routes/messages.routes')
-// using as middleware
-app.use('/api/v1/messages', messagesRoutes)
 
 
 // send rich message with kitten
