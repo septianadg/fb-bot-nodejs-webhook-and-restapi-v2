@@ -1,5 +1,5 @@
 {
-  "name": "testbotfbmessengeradakerja",
+  "name": "fb-bot-nodejs-webhook-and-restapi-v2",
   "version": "1.0.0",
   "description": "TestBot Fb Messenger Adakerja App",
   "main": "index.js",
