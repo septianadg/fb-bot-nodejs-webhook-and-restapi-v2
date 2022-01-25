@@ -35,7 +35,7 @@ app.post('/webhook', function (req, res) {
 
             if(event.message.text.toLowerCase()=== 'hi')
             {
-                sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
+                sendMessage(event.sender.id, {text: "Hi, what is your first name? "+event.sender.id+" "+event.sender.name+" "+event.sender.first_name+" "});
             } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
                 {
                     if(isValidDate(event.message.text.toLowerCase())) 
@@ -45,7 +45,7 @@ app.post('/webhook', function (req, res) {
                     } else {
                         sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
                     }
-            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup')
+            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
             {
                 sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
             } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
