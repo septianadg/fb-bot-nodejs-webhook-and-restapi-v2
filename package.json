@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js server.js"
+    "start": "node index.js && server.js"
   },
   "author": "Septiyan Adi Guna",
   "license": "ISC",
