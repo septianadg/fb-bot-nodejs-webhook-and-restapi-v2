@@ -3,7 +3,7 @@ var dbConn = require('./../config/db.config');
 //Messages object create
 var Messages = function(messages){
   this.sender_id     = messages.sender_id;
-  this.first_name      = messages.first_name;
+  this.question      = messages.question;
   this.messages      = messages.messages;
   this.created_at     = new Date();
   this.updated_at     = new Date();
@@ -44,7 +44,7 @@ else{
 });
 };
 Messages.update = function(id, messages, result){
-dbConn.query("UPDATE messages SET sender_id=?,first_name=?,messages=? WHERE id = ?", [messages.sender_id,messages.first_name,messages.messages, id], function (err, res) {
+dbConn.query("UPDATE messages SET sender_id=?,question=?,messages=? WHERE id = ?", [messages.sender_id,messages.question,messages.messages, id], function (err, res) {
 if(err) {
   console.log("error: ", err);
   result(null, err);

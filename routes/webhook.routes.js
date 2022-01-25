@@ -58,7 +58,7 @@ router.post('/', function (req, res) {
             // Message data, must be stringified
             const dataString = JSON.stringify({
                 sender_id: event.sender.id,
-                first_name: question,
+                question: question,
                 messages: event.message.text
             })
 
