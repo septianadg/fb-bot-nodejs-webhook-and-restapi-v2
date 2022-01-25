@@ -1,4 +1,3 @@
-'use strict';
 const Messages = require('../models/messages.model');   
 var express = require('express');
 const router = express.Router()
