@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+const koneksi = require('./config/database');
+
 var nextbirthday;
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -107,6 +109,24 @@ function getNextBirthday(date,month){
     return days;
     //alert(days+" days until Niet's birthday!");
 }
+
+// create data / insert data
+app.post('/api/messages', (req, res) => {
+    // buat variabel penampung data dan query sql
+    const data = { ...req.body };
+    const querySql = 'INSERT INTO messages SET ?';
+
+    // jalankan query
+    koneksi.query(querySql, data, (err, rows, field) => {
+        // error handling
+        if (err) {
+            return res.status(500).json({ message: 'Failed!', error: err });
+        }
+
+        // jika request berhasil
+        res.status(201).json({ success: true, message: 'Success!' });
+    });
+});
 
 
 // send rich message with kitten
