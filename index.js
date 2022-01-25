@@ -45,7 +45,8 @@ app.post('/webhook', function (req, res) {
                     }
             } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup')
             {
-                sendMessage(event.sender.id, {text: "There are <N> days left until your next birthday"});
+                var nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
+                sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
             } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
             {
                 sendMessage(event.sender.id, {text: "Goodbye"});
@@ -89,6 +90,23 @@ function isValidDate(dateString) {
     if(!dNum && dNum !== 0) return false; // NaN value, Invalid date
     return d.toISOString().slice(0,10) === dateString;
   }
+
+//get Next Birthday
+function getNextBirthday(date,month){
+    var myBirthday, today, bday, diff, days;
+    //myBirthday = [6,2]; // 6th of February
+    myBirthday = [date,month];
+    today = new Date();
+    bday = new Date(today.getFullYear(),myBirthday[1]-1,myBirthday[0]);
+    if( today.getTime() > bday.getTime()) {
+        bday.setFullYear(bday.getFullYear()+1);
+    }
+    diff = bday.getTime()-today.getTime();
+    days = Math.floor(diff/(1000*60*60*24));
+    return days;
+    //alert(days+" days until Niet's birthday!");
+}
+
 
 // send rich message with kitten
 // function kittenMessage(recipientId, text) {
