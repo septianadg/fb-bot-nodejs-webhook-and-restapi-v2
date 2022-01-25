@@ -65,7 +65,7 @@ router.post('/', function (req, res) {
             
                 // Print response
                 .then(response => {
-                    const { id, title } = response.data.body
+                    const { sender_id, messages } = response.data.body
                     console.log(`Post ${sender_id}: ${messages}`)
                 })
             
