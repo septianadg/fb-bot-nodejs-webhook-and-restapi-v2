@@ -49,7 +49,7 @@ router.post('/', function (req, res) {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
 
-            module.exports = async (req, res) => {
+            async (req, res) => {
                 try {
                   const senderId = event.sender.id;
                   //const firstName = req.body.course_id;
