@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 // define a root route
-app.get('/', (req, res) => {
-  res.send("Hello World");
-});
+// app.get('/', (req, res) => {
+//   res.send("Hello World");
+// });
 // Require messages routes
 const messagesRoutes = require('./routes/messages.routes')
 // using as middleware
