@@ -1,6 +1,7 @@
 var express = require('express');
 const router = express.Router()
 var request = require('request');
+let fetch = require('node-fetch');
 
 var nextbirthday;
 
@@ -48,8 +49,6 @@ router.post('/', function (req, res) {
             } else {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
-
-            let fetch = require('node-fetch');
 
             fetch(URL_SERVICE_API+'/api/v1/messages', {
             method: 'POST',
