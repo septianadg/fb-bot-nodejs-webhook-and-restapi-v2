@@ -2,9 +2,9 @@
   "name": "fb-bot-nodejs-webhook-and-restapi-v2",
   "version": "1.0.0",
   "description": "TestBot Fb Messenger Adakerja App",
-  "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node index.js && server.js"
   },
   "author": "Septiyan Adi Guna",
   "license": "ISC",
