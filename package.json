@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon server"
   },
   "author": "Septiyan Adi Guna",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "express": "^4.17.2",
     "mysql": "^2.18.1",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
