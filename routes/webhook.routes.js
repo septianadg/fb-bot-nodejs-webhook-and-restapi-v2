@@ -1,16 +1,13 @@
 var express = require('express');
 const router = express.Router()
 var request = require('request');
-let fetch = require('node-fetch');
+const axios = require('axios')
 
 var nextbirthday;
 
-const apiAdapter = require('./apiAdapter');
 const {
   URL_SERVICE_API
 } = process.env;
-
-const api = apiAdapter(URL_SERVICE_API);
 
 // Facebook Webhook
 router.get('/', function (req, res) {
@@ -50,13 +47,31 @@ router.post('/', function (req, res) {
                 sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
             }
 
-            fetch(URL_SERVICE_API+'/api/v1/messages', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: '{"sender_id" : "'+event.sender.id+'","messages" : "'+event.message.text+'"}'
-            }).then(response => {
-            return response.json();
-            }).catch(err => {console.log(err);});
+
+            const posts = [
+                {
+                   sender_id: event.sender.id,
+                   messages: event.message.text
+                }
+             ]
+
+             // Loop over the posts
+            posts.forEach(post => {
+            
+                // Post data to API endpoint
+                axios.post(URL_SERVICE_API+'/api/v1/messages', {
+                body: post,
+                })
+            
+                // Print response
+                .then(response => {
+                    const { id, title } = response.data.body
+                    console.log(`Post ${sender_id}: ${messages}`)
+                })
+            
+                // Print error message if occur
+                .catch(error => console.log(error))
+            })
             
         } 
     }
