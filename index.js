@@ -109,6 +109,11 @@ function getNextBirthday(date,month){
     //alert(days+" days until Niet's birthday!");
 }
 
+// Require message routes
+const messagesRoutes = require('./routes/messages.routes')
+// using as middleware
+app.use('/api/v1/messages', messagesRoutes)
+
 
 // send rich message with kitten
 // function kittenMessage(recipientId, text) {
