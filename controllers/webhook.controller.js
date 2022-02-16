@@ -43,8 +43,9 @@ exports.create = function(req, res) {
                     }
             } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
             {
+                today = new Date();
                 sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
-                question = "There are "+nextbirthday+" days left until your next birthday";
+                question = "In "+today.getFullYear()+", there are "+nextbirthday+" days left until your next birthday";
             } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
             {
                 sendMessage(event.sender.id, {text: "Goodbye"});
@@ -132,7 +133,7 @@ function getNextBirthday(date,month){
     //myBirthday = [6,2]; // 6th of February
     myBirthday = [date,month];
     today = new Date();
-    bday = new Date(today.getFullYear(),myBirthday[1],myBirthday[0]);
+    bday = new Date(today.getFullYear(),myBirthday[1]-1,myBirthday[0]+1);
     /*if( today.getTime() > bday.getTime()) {
         bday.setFullYear(bday.getFullYear()+1);
     }*/
