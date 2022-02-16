@@ -69,7 +69,7 @@ router.post('/', function (req, res) {
         
             // Options to pass into the request
             const webhookOptions = {
-                "hostname": "fb-bot-nodejs-webhook-and-rest.herokuapp.com",
+                "hostname": process.env.WEBHOOK_HOSTNAME,
                 "path": "/api/v1/messages",
                 "method": "POST",
                 "headers": headers,
