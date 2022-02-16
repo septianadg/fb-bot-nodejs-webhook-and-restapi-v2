@@ -43,7 +43,7 @@ exports.create = function(req, res) {
                     }
             } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
             {
-                today = new Date();
+                var today = new Date();
                 sendMessage(event.sender.id, {text: "There are "+nextbirthday+" days left until your next birthday"});
                 question = "In "+today.getFullYear()+", there are "+nextbirthday+" days left until your next birthday";
             } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
