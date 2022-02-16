@@ -25,14 +25,14 @@ exports.create = function(req, res) {
         var question;
         if (event.message && event.message.text) {
             var values = event.message.text.split('-');
-
-            if(event.message.text.toLowerCase()=== 'hi')
+            var eventtextLowerCase = event.message.text.toLowerCase();
+            if(eventtextLowerCase=== 'hi')
             {
                 sendMessage(event.sender.id, {text: "Hi, what is your first name?"});
                 question = "Hi, what is your first name?";
-            } else if (event.message.text.toLowerCase()!== 'hi' && Number(values[0])>0)
+            } else if (eventtextLowerCase!== 'hi' && Number(values[0])>0)
                 {
-                    if(isValidDate(event.message.text.toLowerCase())) 
+                    if(isValidDate(eventtextLowerCase)) 
                     {
                         nextbirthday = getNextBirthday(Number(values[2]),Number(values[1]));
                         sendMessage(event.sender.id, {text: "Do you want to know how many days till your next birthday?"});
@@ -41,12 +41,12 @@ exports.create = function(req, res) {
                         sendMessage(event.sender.id, {text: "Tell me, your birthdate (format : yyyy-mm-dd)"});
                         question = "Tell me, your birthdate (format : yyyy-mm-dd)";
                     }
-            } else if(event.message.text.toLowerCase()=== 'yes' || event.message.text.toLowerCase()=== 'yeah' || event.message.text.toLowerCase()=== 'yup' || event.message.text.toLowerCase()=== 'sure')
+            } else if(eventtextLowerCase=== 'yes' || eventtextLowerCase=== 'yeah' || eventtextLowerCase=== 'yup' || eventtextLowerCase=== 'sure')
             {
                 var today = new Date();
                 sendMessage(event.sender.id, {text: "In "+today.getFullYear()+", there are "+nextbirthday+" days left until your next birthday"});
                 question = "In "+today.getFullYear()+", there are "+nextbirthday+" days left until your next birthday";
-            } else if(event.message.text.toLowerCase()=== 'no' || event.message.text.toLowerCase()=== 'nah')
+            } else if(eventtextLowerCase=== 'no' || eventtextLowerCase=== 'nah')
             {
                 sendMessage(event.sender.id, {text: "Goodbye"});
                 question = "Goodbye";
