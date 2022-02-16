@@ -19,6 +19,7 @@ exports.findAll = function(req, res) {
 
 exports.create = function(req, res) {
     var events = req.body.entry[0].messaging;
+    var i;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         var question;
