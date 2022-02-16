@@ -132,7 +132,7 @@ function getNextBirthday(date,month){
     //myBirthday = [6,2]; // 6th of February
     myBirthday = [date,month];
     today = new Date();
-    bday = new Date(today.getFullYear(),myBirthday[1]-1,myBirthday[0]);
+    bday = new Date(today.getFullYear(),myBirthday[1],myBirthday[0]);
     /*if( today.getTime() > bday.getTime()) {
         bday.setFullYear(bday.getFullYear()+1);
     }*/
